@@ -1,11 +1,10 @@
 DAY = 1
 
 
-def part1(inp: list[str]):
+def part1(inp: list[str]) -> int:
     S = 0
     for line in inp:
-        x = None
-        y = None
+        x = y = None
         for c in line:
             if c in "123456789":
                 if x is None:
@@ -13,10 +12,11 @@ def part1(inp: list[str]):
                 y = int(c)
 
         S += x*10+y
+    
     return S
 
 
-def part2(inp: list[str]):
+def part2(inp: list[str]) -> int:
     S = 0
     for line in inp:
         digits = {"1": "one", "2": "two", "3": "three", "4": "four", "5": "five", "6": "six", "7": "seven", "8": "eight", "9": "nine"}
@@ -43,6 +43,7 @@ def part2(inp: list[str]):
                     place_y, y = string1, value
 
         S += x*10+y
+    
     return S
 
 
