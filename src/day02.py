@@ -1,7 +1,8 @@
 DAY = 2
 
+
 def part1(inp: list[str]) -> int:
-    MAX_RED, MAX_GREEN, MAX_BLUE = 12, 13, 14
+    maxs = {"red": 12, "green": 13, "blue": 14}
 
     S = 0
     for line in inp:
@@ -9,21 +10,15 @@ def part1(inp: list[str]) -> int:
         _, game_id = game[0].split()
         game_id = int(game_id)
         rounds = game[1].split('; ')
+        
         impossible = False
-
         for r in rounds:
             if impossible:
                 break
             for x in r.split(', '):
                 nr, color = x.split(' ')
                 nr = int(nr)
-                if color == 'red' and nr > MAX_RED:
-                    impossible = True
-                    break
-                if color == 'green' and nr > MAX_GREEN:
-                    impossible = True
-                    break
-                if color == 'blue' and nr > MAX_BLUE:
+                if nr > maxs[color]:
                     impossible = True
                     break
 
