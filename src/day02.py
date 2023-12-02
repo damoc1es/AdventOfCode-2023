@@ -10,15 +10,15 @@ def part1(inp: list[str]) -> int:
         _, game_id = game[0].split()
         game_id = int(game_id)
         rounds = game[1].split('; ')
-        
+
         impossible = False
         for r in rounds:
             if impossible:
                 break
             for x in r.split(', '):
                 nr, color = x.split(' ')
-                nr = int(nr)
-                if nr > maxs[color]:
+                
+                if int(nr) > maxs[color]:
                     impossible = True
                     break
 
@@ -35,20 +35,14 @@ def part2(inp: list[str]) -> int:
         game_id = int(game_id)
         rounds = game[1].split('; ')
 
-        max_red = max_green = max_blue = 0
+        maxs = {"red": 0, "green": 0, "blue": 0}
         
         for r in rounds:
             for x in r.split(', '):
                 nr, color = x.split(' ')
-                nr = int(nr)
-                if color == 'red':
-                    max_red = max(max_red, nr)
-                if color == 'green':
-                    max_green = max(max_green, nr)
-                if color == 'blue':
-                    max_blue = max(max_blue, nr)
+                maxs[color] = max(maxs[color], int(nr))
 
-        S += (max_red * max_green * max_blue)
+        S += (maxs['red'] * maxs['green'] * maxs['blue'])
     return S
 
 
