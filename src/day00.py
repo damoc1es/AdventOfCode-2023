@@ -3,12 +3,12 @@ import numpy as np
 DAY = 0
 
 
-def part1(inp: list[str]):
+def part1(inp: list[str]) -> int:
     print(inp)
     return 0
 
 
-def part2(inp: list[str]):
+def part2(inp: list[str]) -> int:
     return 0
 
 
