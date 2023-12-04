@@ -84,7 +84,7 @@ def part2(inp: list[str]) -> int:
     return S
 
 
-def read_input_file(filename: str) -> list[str]:
+def read_input_file(filename: str) -> list[list[str|None]]:
     with open(filename, 'r', encoding='utf8') as fin:
         inp = fin.readlines()
 
