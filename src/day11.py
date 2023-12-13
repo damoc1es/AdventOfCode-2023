@@ -21,9 +21,8 @@ def part1(inp: list[list[int]]) -> int:
 
     S = 0
     for i in range(len(nodes)):
-        for j in range(i, len(nodes)):
-            if i != j:
-                S += manhattan(nodes[i], nodes[j])
+        for j in range(i+1, len(nodes)):
+            S += manhattan(nodes[i], nodes[j])
     
     return S
 
@@ -44,9 +43,8 @@ def part2(inp: list[list[int]]) -> int:
 
     S = 0
     for i in range(len(nodes)):
-        for j in range(i, len(nodes)):
-            if i != j:
-                S += manhattan(nodes[i], nodes[j])
+        for j in range(i+1, len(nodes)):
+            S += manhattan(nodes[i], nodes[j])
     
     return S
 
