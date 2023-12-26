@@ -1,4 +1,3 @@
-import numpy as np
 from queue import Queue
 
 DAY = 22
@@ -89,8 +88,40 @@ def part1(inp: list[str]) -> int:
 
 
 def part2(inp: list[str]) -> int:
+    cubes, brick = get_bricks_and_cubes(inp)
+    supports, is_supported = get_supports(brick, cubes)
 
-    return 0
+    disintegrable = get_disintegrable(supports, is_supported)
+    k = 0
+    for s_id in brick.keys():
+        if s_id in disintegrable:
+            continue
+        to_be_checked = set()
+
+        _, is_supported2 = get_supports(brick, cubes)
+        
+        q = Queue()
+        q.put(s_id)
+        
+        for s_id2 in supports[s_id]:
+            q.put(s_id2)
+            is_supported2[s_id2].remove(s_id)
+
+        while not q.empty():
+            s_id2 = q.get()
+            to_be_checked.add(s_id2)
+
+            if len(is_supported2[s_id2]) == 0:
+                for s_id3 in supports[s_id2]:
+                    q.put(s_id3)
+                    if s_id2 in is_supported2[s_id3]:
+                        is_supported2[s_id3].remove(s_id2)
+
+        for s_id2 in to_be_checked:
+            if len(is_supported2[s_id2]) == 0 and s_id2 != s_id:
+                k += 1
+
+    return k
 
 
 def read_input_file(filename: str) -> list[str]:
@@ -102,7 +133,7 @@ def read_input_file(filename: str) -> list[str]:
 
 if __name__ == '__main__':
     input_str = read_input_file(f"data/input{DAY:02d}.txt")
-    input_str = read_input_file(f"data/input00.txt")
+    # input_str = read_input_file(f"data/input00.txt")
 
     print(f"Part 1: {part1(input_str)}")
     print(f"Part 2: {part2(input_str)}")
